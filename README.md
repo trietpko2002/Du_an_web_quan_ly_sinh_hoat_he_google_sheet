@@ -1,2 +1,4 @@
 # Du_an_web_quan_ly_sinh_hoat_he_google_sheet
-Đây là 1 dự án phục vụ cho đoàn phường khi mỗi mùa hè tới thì các trường sẽ gởi giấy sinh hoạt để sinh hoạt tại địa phương và web này mục đích làm để quản lý thông tin học sinh, điểm danh, quản lý các quản lý nhóm để đánh giá 1 cách trơn tru thay vì dùng giấy, file excel nặng đô
+Đây là 1 dự án phục vụ cho đoàn phường khi mỗi mùa hè tới thì các trường sẽ gởi giấy sinh hoạt để sinh hoạt tại địa phương và web này mục đích làm để quản lý thông tin học sinh, điểm danh, quản lý các quản lý nhóm để đánh giá 1 cách trơn tru thay vì dùng giấy, file excel nặng đô và chính mình cũng là quản lý sinh hoạt hè lần điểm danh thì không thấy đâu khi về kêu có em đi thì phải xóa đi rồi đánh lại rất mất thời gian và cũng gặp file excel nặng đô khi làm xong thì có đứa nhắn là "Anh ơi, bữa em có đi mà sao anh đánh vắng em?" là phải mở lại chờ thêm chút nữa nên mình tức quá mới tạo ra dự án này để quản lý và cũng có thể sẽ thương mại cái file project này hoặc free (có tâm donate thì cứ donate cho mình nhé!)
+
+Dự án này sẽ bắt đầu hoạt động chính thức web quản lý vào mùa hè tháng 6 là bắt đầu sinh hoạt hè!

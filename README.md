@@ -1,10 +1,12 @@
 # ☀️ SUMMER MANAGEMENT SYSTEM (HỆ THỐNG QUẢN LÝ SINH HOẠT HÈ)
 
-Hệ thống quản lý sinh hoạt hè xây dựng trên nền tảng **Web nhẹ (HTML/JavaScript)**, sử dụng **Google Sheets** làm cơ sở dữ liệu và **Google Apps Script (GAS)** làm Backend API.
+🚧 **SẮP RA MẮT (COMING SOON)** 🚧
 
-Mục tiêu của dự án là:
+SUMMER MANAGEMENT SYSTEM là hệ thống quản lý sinh hoạt hè **đang trong giai đoạn hoàn thiện và chuẩn bị phát hành**, xây dựng trên nền tảng **Web nhẹ (HTML/JavaScript)**, sử dụng **Google Sheets** làm cơ sở dữ liệu và **Google Apps Script (GAS)** làm Backend API.
+
+Dự án hướng tới việc cung cấp một giải pháp:
 - Dễ triển khai – không cần server riêng
-- Phù hợp cho cán bộ Đoàn – quản lý học sinh hè
+- Phù hợp cho cán bộ quản lý, giáo viên, điều phối viên sinh hoạt hè
 - An toàn, có phân quyền, nhật ký truy vết
 - Tối ưu cho thiết bị di động
 
@@ -178,11 +180,23 @@ const APPS_SCRIPT_URL = "YOUR_WEB_APP_URL";
 
 ---
 
+## 📄 GIẤY PHÉP
+
+Dự án đang trong giai đoạn phát triển và **định hướng thương mại hóa trong tương lai**.
+
+Quyền sử dụng hiện tại:
+- Cho phép dùng thử, nghiên cứu và triển khai nội bộ
+- Cho phép tùy chỉnh, mở rộng theo nhu cầu
+
+Lưu ý:
+- Điều khoản thương mại chính thức sẽ được công bố ở các phiên bản phát hành sau
+- Không sử dụng mã nguồn cho mục đích vi phạm pháp luật
+
+---
 
 ## ❤️ ĐÓNG GÓP
 
 Mọi ý kiến đóng góp, cải tiến vui lòng phản hồi qua GitHub hoặc qua Email: phanranggaming@gmail.com
 ---
 
-🌻 **Chúc hệ thống sinh hoạt hè của Đoàn Phường vận hành hiệu quả – minh bạch – hiện đại!**
 

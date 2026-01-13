@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sắp ra mắt - Hệ thống Quản lý Sinh hoạt hè</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --doan-blue: #0056b3;
+            --accent-yellow: #ffcc00;
+            --text-white: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(135deg, #004a99 0%, #007bff 100%);
+        }
+
+        /* --- UI CHÍNH --- */
+        .container {
+            position: relative; z-index: 1; width: 90%; max-width: 650px;
+            padding: 2.5rem; background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px; backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2); text-align: center;
+        }
+
+        h1 { font-size: clamp(1.4rem, 5vw, 2.5rem); margin: 0.5rem 0; color: white; text-transform: uppercase; font-weight: 900; }
+
+        .highlight-box {
+            display: inline-block; background: var(--accent-yellow); color: #000;
+            padding: 8px 20px; border-radius: 50px; font-weight: 700;
+            margin: 1rem 0; font-size: 0.85rem;
+        }
+
+        .button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 1rem; }
+
+        .btn {
+            padding: 10px 22px; font-size: 0.85rem; font-weight: bold;
+            border-radius: 25px; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; text-decoration: none; border: none;
+        }
+
+        .btn-features { background: var(--accent-yellow); color: #000; }
+        .btn-outline { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+
+        /* --- MODAL HỆ THỐNG --- */
+        .modal {
+            display: none; position: fixed; inset: 0; z-index: 1000;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+            padding: 20px; align-items: center; justify-content: center;
+        }
+
+        .modal-content {
+            background: #fff; border-radius: 15px; width: 100%; max-width: 900px;
+            max-height: 90vh; overflow: hidden; position: relative; display: flex; flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 15px; border-bottom: 1px solid #eee; text-align: center; position: relative; background: #fafafa;
+        }
+
+        .close { position: absolute; right: 20px; top: 12px; font-size: 30px; cursor: pointer; color: #999; }
+
+        /* Tabs điều hướng */
+        .tab-nav { display: flex; background: #f1f3f5; border-bottom: 1px solid #ddd; }
+        .tab-link {
+            flex: 1; padding: 15px 10px; border: none; background: none; cursor: pointer;
+            font-weight: bold; color: #666; transition: 0.3s; font-size: 0.85rem;
+        }
+        .tab-link.active { color: var(--doan-blue); border-bottom: 3px solid var(--doan-blue); background: #fff; }
+
+        .tab-content { 
+            padding: 25px; overflow-y: auto; color: #333; 
+            line-height: 1.5; flex-grow: 1;
+        }
+        
+        .feature-detail-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+
+        .detail-item h4 { 
+            color: var(--doan-blue); margin: 0 0 10px 0; 
+            border-bottom: 2px solid var(--doan-blue); 
+            padding-bottom: 5px; display: inline-block;
+            font-size: 1rem;
+        }
+        .detail-item ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+        .detail-item li { margin-bottom: 8px; list-style-type: square; }
+
+        .tab-title-main {
+            text-align: center; font-weight: bold; color: #444; margin-bottom: 20px; text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .feature-detail-grid { grid-template-columns: 1fr; }
+            .tab-link { font-size: 0.7rem; padding: 10px 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="font-weight: 700; color: var(--accent-yellow); font-size: 0.7rem; letter-spacing: 2px;">QUẢN LÝ SINH HOẠT HÈ KỸ THUẬT SỐ</div>
+        <h1>COMING SOON!</h1>
+        
+        <div class="highlight-box">🚀 DỰ KIẾN VẬN HÀNH: 01/06/2026</div>
+
+        <p style="color: #eee; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Nền tảng Cloud tập trung giúp tối ưu hóa công tác quản lý,<br> 
+            giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
+        </p>
+
+        <div class="button-group">
+            <button class="btn btn-features" onclick="openModal()">Xem chi tiết giải pháp</button>
+            <br>
+            <a href="#" class="btn btn-outline">📂 GitHub</a>
+            <a href="#" class="btn btn-outline">✨ Google Sheets</a>
+        </div>
+    </div>
+
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 style="margin:0; color: var(--doan-blue); font-size: 1.1rem; text-transform: uppercase;">Chi tiết phân quyền & Chức năng hệ thống</h2>
+            </div>
+
+            <div class="tab-nav">
+                <button class="tab-link active" onclick="openTab(event, 'tab1')">👥 PHỤ TRÁCH NHÓM</button>
+                <button class="tab-link" onclick="openTab(event, 'tab2')">🛡️ QUẢN TRỊ ADMIN</button>
+            </div>
+
+            <div id="tab1" class="tab-content" style="display: block;">
+                <div class="tab-title-main">NGHIỆP VỤ PHỤ TRÁCH NHÓM (INDEX.HTML)</div>
+                <div class="feature-detail-grid">
+                    <div class="detail-item">
+                        <h4>📍 Quản lý & Điểm danh</h4>
+                        <ul>
+                            <li><b>Danh sách:</b> Xem danh sách học sinh nhóm mình và xuất danh sách.</li>
+                            <li><b>Điểm danh:</b> Nút điểm danh Có mặt / Vắng mặt (Chia rõ: Có lý do & Không lý do).</li>
+                            <li><b>Hồ sơ:</b> Thêm, sửa, xóa thông tin học sinh trực thuộc nhóm.</li>
+                            <li><b>Đánh giá:</b> Thực hiện đánh giá học sinh cuối kỳ.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>🔔 Tương tác & Thông báo</h4>
+                        <ul>
+                            <li><b>Nhận tin:</b> Nhận thông báo hoạt động từ Admin (có nút xác nhận đã xem để ghi log).</li>
+                            <li><b>Phản ánh:</b> Gửi ý kiến lên Đoàn phường qua Google Form nhúng trực tiếp.</li>
+                            <li><b>Tiện ích:</b> Cho phép mở thông báo đẩy và có nút chuông báo động.</li>
+                            <li><b>Truy cập:</b> Đăng nhập qua Login.html để bảo mật dữ liệu nhóm.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab2" class="tab-content" style="display: none;">
+                <div class="tab-title-main">CÔNG CỤ QUẢN TRỊ VIÊN (ADMIN.HTML)</div>
+                <div class="feature-detail-grid">
+                    <div class="detail-item">
+                        <h4>📊 Dashboard & Tài khoản</h4>
+                        <ul>
+                            <li><b>Thống kê:</b> Tổng số học sinh, số quản lý, số ý kiến phản hồi.</li>
+                            <li><b>Biến động:</b> Theo dõi tình hình có mặt/vắng theo thời gian thực.</li>
+                            <li><b>Quản lý User:</b> Thêm, sửa, xóa tài khoản quản lý.</li>
+                            <li><b>Mật khẩu:</b> Tính năng Reset password về mặc định (Abc@123).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📂 Dữ liệu & Nhóm</h4>
+                        <ul>
+                            <li><b>Quản lý nhóm:</b> Thêm, sửa, xóa nhóm sinh hoạt (Dropdownlist chọn quản lý).</li>
+                            <li><b>Bộ lọc nâng cao:</b> Lọc theo tên quản lý, theo nhóm, năm sinh và ngày điểm danh.</li>
+                            <li><b>Xuất dữ liệu:</b> Xuất file Excel theo ngày để báo cáo.</li>
+                            <li><b>Ghi log (Tab 5):</b> Lưu lịch sử Đăng nhập, Thêm, Sửa, Xóa, Điểm danh, Đánh giá của từng quản lý.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📢 Điều phối hoạt động</h4>
+                        <ul>
+                            <li><b>Push thông báo:</b> Tạo thông báo (Tên hoạt động, nội dung, ngày giờ).</li>
+                            <li><b>Kiểm soát điểm danh:</b> Cài đặt cho phép điểm danh sớm hoặc đúng giờ mới mở cổng.</li>
+                            <li><b>Xử lý phản hồi:</b> Nhận danh sách ý kiến từ Google Form và đẩy lên Dashboard.</li>
+                            <li><b>Chốt kỳ:</b> Nút gạt bật/tắt chức năng đánh giá khi kết thúc sinh hoạt hè.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("featureModal");
+        
+        function openModal() { modal.style.display = "flex"; }
+        function closeModal() { modal.style.display = "none"; }
+        
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Đóng khi click ra ngoài
+        window.onclick = function(event) { if (event.target == modal) closeModal(); }
+    </script>
+
+</body>
+</html>

@@ -1,202 +1,147 @@
-# ☀️ SUMMER MANAGEMENT SYSTEM (HỆ THỐNG QUẢN LÝ SINH HOẠT HÈ)
+# 📝 HỆ THỐNG QUẢN LÝ SINH HOẠT HÈ (SHH)
 
-🚧 **SẮP RA MẮT (COMING SOON)** 🚧
-
-SUMMER MANAGEMENT SYSTEM là hệ thống quản lý sinh hoạt hè **đang trong giai đoạn hoàn thiện và chuẩn bị phát hành**, xây dựng trên nền tảng **Web nhẹ (HTML/JavaScript)**, sử dụng **Google Sheets** làm cơ sở dữ liệu và **Google Apps Script (GAS)** làm Backend API.
-
-Dự án hướng tới việc cung cấp một giải pháp:
-- Dễ triển khai – không cần server riêng
-- Phù hợp cho cán bộ quản lý, giáo viên, điều phối viên sinh hoạt hè
-- An toàn, có phân quyền, nhật ký truy vết
-- Tối ưu cho thiết bị di động
+> 🌞 Giải pháp chuyển đổi số cho công tác quản lý sinh hoạt hè tại địa phương
 
 ---
 
-## 🚀 TÍNH NĂNG CHÍNH
+> [!IMPORTANT]  
+> ⚠️ **LƯU Ý QUAN TRỌNG**  
+> Đây **KHÔNG PHẢI** là trang web chính thức.  
+> Hệ thống hiện đang trong giai đoạn **phát triển & thử nghiệm**, **chưa triển khai chạy thực tế**.
 
-### 🛡️ 1. Đăng nhập & Bảo mật đa lớp
-- **Cloudflare Turnstile**: Xác thực người dùng (Human Verification), chống spam & brute-force
-- **RBAC – Phân quyền người dùng**
-  - **Admin**: Toàn quyền hệ thống, yêu cầu xác thực **2FA (Google Authenticator – TOTP)**
-  - **Manager (Quản lý)**: Chỉ truy cập dữ liệu nhóm được phân công
-- **Session Management**
-  - Kiểm tra quyền truy cập ở mọi trang
-  - Chặn truy cập trái phép qua URL
+🗓️ **Ngày vận hành chính thức dự kiến:**  
+📅 **01 / 06 / 2026**
 
 ---
 
-### 📊 2. Trang quản trị Admin (`admin.html`)
-Giao diện sử dụng **AdminLTE 3**
+## 🌟 Giới thiệu chung
 
-**Các Tab chức năng:**
+**Hệ thống Quản lý Sinh hoạt hè (SHH)** là giải pháp số hóa nhằm hỗ trợ:
 
-1. **Dashboard**
-   - Thống kê tổng số học sinh, quản lý, thông báo
-   - Biểu đồ điểm danh theo ngày (Chart.js)
+- Quản lý học sinh
+- Điểm danh hằng ngày
+- Điều hành và theo dõi các hoạt động hè tại địa phương
 
-2. **Quản lý tài khoản**
-   - Thêm / Sửa / Xóa tài khoản Quản lý
-   - Reset mật khẩu nhanh về mặc định: `Abc@123`
-
-3. **Quản lý nhóm**
-   - Tạo & chỉnh sửa các nhóm sinh hoạt hè
-   - Dữ liệu nền cho toàn hệ thống
-
-4. **Cơ sở dữ liệu học sinh**
-   - Danh sách tổng học sinh
-   - Bộ lọc nâng cao: năm sinh, nhóm, quản lý
-   - Xuất báo cáo Excel theo ngày
-
-5. **Nhật ký hệ thống (Audit Logs)**
-   - Ghi lại mọi hành động: đăng nhập, thêm/sửa/xóa, điểm danh
-   - Phục vụ truy vết & kiểm tra
-
-6. **Quản lý thông báo**
-   - Soạn nội dung sinh hoạt hè
-   - Thiết lập thời gian mở điểm danh
-   - Gửi thông báo đẩy cho Quản lý
+🎯 Mục tiêu của hệ thống:
+- Giảm thiểu thủ tục giấy tờ
+- Nâng cao tính minh bạch
+- Tăng hiệu quả quản lý và tổng hợp dữ liệu
+- Phù hợp cho **Đoàn Phường / Khu phố / Ban điều hành sinh hoạt hè**
 
 ---
 
-### 📱 3. Cổng thông tin Quản lý (`index.html`)
-Thiết kế **Mobile-first**, thân thiện điện thoại
+## 🚀 Các tính năng chính
 
-**Chức năng:**
+### 👨‍🏫 1. Dành cho **Quản lý Nhóm** (Người phụ trách trực tiếp)
 
-1. **Điểm danh thông minh**
-   - Danh sách học sinh theo nhóm
-   - 3 trạng thái nhanh:
-     - Có mặt
-     - Vắng có lý do
-     - Vắng không lý do
+#### ✅ Điểm danh thông minh
+- Giao diện điểm danh nhanh theo từng ngày
+- Hỗ trợ trạng thái:
+  - ✔️ Có mặt
+  - 🅿️ Vắng có phép (P)
+  - ❌ Vắng không phép (K)
 
-2. **Quản lý học sinh nội bộ**
-   - Thêm nhanh học sinh mới vào nhóm
-   - Cập nhật thông tin cá nhân
+#### 👥 Quản lý học sinh
+- Xem danh sách học sinh theo nhóm
+- Thêm mới học sinh thủ công
+- 📥 **Nhập dữ liệu hàng loạt từ file Excel**
 
-3. **Hoạt động & Phản hồi**
-   - Nhận thông báo từ Admin
-   - Gửi phản ánh qua Google Form (Iframe)
-   - Đánh giá – xếp loại học sinh cuối kỳ
+#### 💰 Quản lý Quỹ nhóm
+- Theo dõi thu / chi chi tiết
+- Tính toán quỹ tự động
+- 📤 Xuất báo cáo quỹ ra file Excel
+- Minh bạch – dễ kiểm tra – dễ tổng hợp
 
----
+#### 🏅 Đánh giá & Xếp loại
+- Đánh giá:
+  - Ý thức kỷ luật
+  - Mức độ tích cực tham gia
+- Tổng hợp kết quả cuối đợt sinh hoạt
 
-### 🔔 4. Thông báo & Tương tác
-- Chuông thông báo hiển thị số lượng tin chưa đọc
-- **Web Push Notification** trên trình duyệt
-- Cá nhân hóa giao diện:
-  - Lời chào theo tên
-  - Avatar người dùng
-
----
-
-## 🛠️ CÔNG NGHỆ SỬ DỤNG
-
-### Frontend
-- HTML5, CSS3
-- AdminLTE 3
-- JavaScript (ES6+)
-
-### Backend
-- Google Apps Script (GAS)
-
-### Database
-- Google Sheets API
-
-### Hosting
-- **Vercel** (Production)
-- **GitHub Pages** (Backup)
-
-### Security
-- Cloudflare Turnstile
-- TOTP – Google Authenticator (2FA)
-
-### Thư viện hỗ trợ
-- DataTables.js – Quản lý bảng
-- Chart.js – Biểu đồ
-- SheetJS – Xuất Excel
-- Toastr.js – Thông báo nhanh
+#### 💬 Gửi góp ý
+- Gửi khó khăn, phản ánh hoặc đề xuất
+- Kết nối trực tiếp với **Ban quản trị (Admin)**
 
 ---
 
-## 🗂️ CẤU TRÚC GOOGLE SHEETS
+### 🛡️ 2. Dành cho **Ban quản trị (Admin)**
 
-Tạo Google Sheets với các Sheet sau:
+#### 📊 Bảng điều khiển (Dashboard)
+- Thống kê tổng quan:
+  - Tổng số học sinh
+  - Tỷ lệ điểm danh
+- Hiển thị bằng **biểu đồ trực quan**
 
-| Sheet name | Mô tả |
-|-----------|------|
-| `users` | Tài khoản Admin / Manager |
-| `groups` | Danh sách nhóm sinh hoạt hè |
-| `students` | Thông tin học sinh |
-| `attendance` | Dữ liệu điểm danh |
-| `notifications` | Thông báo hệ thống |
-| `logs` | Nhật ký hành động |
+#### ⚙️ Quản lý hệ thống
+- Quản lý:
+  - Danh sách nhóm sinh hoạt
+  - Tài khoản người phụ trách
+  - Toàn bộ dữ liệu học sinh
 
----
+#### 📢 Thông báo
+- Đăng tin tức
+- Gửi thông báo chung đến tất cả các nhóm
 
-## ⚙️ HƯỚNG DẪN CÀI ĐẶT NHANH (QUICK START)
+#### 🔐 Bảo mật & Nhật ký hệ thống
+- Theo dõi **Logs** hoạt động
+- Quản lý mã **PIN bảo mật** cho từng tài khoản
+- Kiểm soát các thao tác quan trọng
 
-### 1️⃣ Google Sheets
-- Sao chép file mẫu dữ liệu
-- Đặt đúng tên các Sheet như trên
-
-### 2️⃣ Google Apps Script
-- Vào **Extensions → Apps Script**
-- Dán toàn bộ code vào `Code.gs`
-- Deploy:
-  - Type: **Web App**
-  - Execute as: **Me**
-  - Access: **Anyone**
-- Sao chép URL Web App
-
-### 3️⃣ Frontend
-- Cập nhật biến sau trong `script.js`:
-```js
-const APPS_SCRIPT_URL = "YOUR_WEB_APP_URL";
-```
-
-### 4️⃣ Deploy
-- Push source code lên GitHub
-- Kết nối repo với **Vercel** và Deploy
+#### 💾 Sao lưu dữ liệu
+- Chức năng:
+  - Backup dữ liệu
+  - Restore khi có sự cố
+- Đảm bảo an toàn & toàn vẹn dữ liệu
 
 ---
 
-## 🔐 TÀI KHOẢN MẪU
+### 👨‍👩‍👧 3. Dành cho **Học sinh / Phụ huynh**
 
-| Role | Username | Password |
-|----|---------|----------|
-| Admin | admin | Abc@123 |
-| Manager | manager01 | Abc@123 |
-
-> ⚠️ **Khuyến nghị:** Đổi mật khẩu ngay sau khi đăng nhập lần đầu
+#### 📝 Đăng ký trực tuyến
+- Form đăng ký sinh hoạt hè
+- Thực hiện trực tiếp ngay trên **trang đăng nhập**
+- Nhanh gọn – tiện lợi – dễ sử dụng
 
 ---
 
-## 📌 LƯU Ý BẢO MẬT
-- Không chia sẻ URL Web App GAS công khai
-- Bật 2FA cho tài khoản Admin
-- Phân quyền đúng nhóm cho Manager
-- Sao lưu Google Sheets định kỳ
+## 🛠️ Công nghệ sử dụng
+
+### 🎨 Giao diện
+- **HTML5**
+- **CSS3**
+- **JavaScript (jQuery)**
+
+### 🧩 Template
+- **AdminLTE 3**
+- Dựa trên **Bootstrap 4**
+
+### 📚 Thư viện hỗ trợ
+- **SweetAlert2** – Thông báo chuyên nghiệp
+- **SheetJS (xlsx)** – Xử lý file Excel
+- **Chart.js** – Biểu đồ thống kê
+- **Toastr** – Thông báo nhanh, gọn
 
 ---
 
-## 📄 GIẤY PHÉP
+## 🔒 Bảo mật
 
-Dự án đang trong giai đoạn phát triển và **định hướng thương mại hóa trong tương lai**.
-
-Quyền sử dụng hiện tại:
-- Cho phép dùng thử, nghiên cứu và triển khai nội bộ
-- Cho phép tùy chỉnh, mở rộng theo nhu cầu
-
-Lưu ý:
-- Điều khoản thương mại chính thức sẽ được công bố ở các phiên bản phát hành sau
-- Không sử dụng mã nguồn cho mục đích vi phạm pháp luật
+- 🔑 Bắt buộc đăng nhập để truy cập dữ liệu
+- 🔐 **Mã PIN lớp bảo mật thứ hai** cho các thao tác quan trọng
+- 🧾 Ghi log toàn bộ hoạt động hệ thống
 
 ---
 
-## ❤️ ĐÓNG GÓP
+## 📌 Trạng thái dự án
 
-Mọi ý kiến đóng góp, cải tiến vui lòng phản hồi qua GitHub hoặc qua Email: phanranggaming@gmail.com
+🚧 **Đang phát triển & hoàn thiện**  
+✨ Sẽ tiếp tục cập nhật thêm:
+- Tối ưu giao diện
+- Mở rộng phân quyền
+- Nâng cao bảo mật
+- Cải thiện trải nghiệm người dùng
+
 ---
 
+> 💙 Dự án được xây dựng với mục tiêu **phục vụ cộng đồng**,  
+> hướng tới một mùa hè **kỷ luật – minh bạch – hiệu quả** cho thế hệ trẻ.
 

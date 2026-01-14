@@ -10,11 +10,90 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
-    .login-page { background: #e9ecef; }
-    .card-primary.card-outline { border-top: 3px solid #007bff; }
+    /* Youth Union Theme */
+    .login-page { background: #e3f2fd; }
+    .card-primary.card-outline { border-top: 3px solid #1e88e5; }
+    .btn-primary { background-color: #1e88e5; border-color: #1976d2; }
+    .btn-primary:hover { background-color: #1565c0; border-color: #0d47a1; }
+    .login-logo b { color: #1e88e5; }
+
+    /* Welcome Screen Animation */
+    #welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1e88e5;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease-out;
+      text-align: center;
+      padding: 20px;
+    }
+    #welcome-screen.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #welcome-screen h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease-out;
+    }
+    #welcome-screen p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.3s;
+      animation-fill-mode: backwards;
+    }
+    #start-btn {
+      font-size: 1.1rem;
+      padding: 12px 40px;
+      border-radius: 50px;
+      background-color: #fff;
+      color: #1e88e5;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: zoomIn 1s ease-out 0.6s;
+      animation-fill-mode: backwards;
+    }
+    #start-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body class="hold-transition login-page">
+<!-- Welcome Screen -->
+<div id="welcome-screen">
+  <h1>Chào mừng bạn!</h1>
+  <p>Đến với Hệ thống Quản lý Sinh hoạt hè</p>
+  <button id="start-btn">
+    <i class="fas fa-rocket mr-2"></i> BẮT ĐẦU
+  </button>
+</div>
+
 <div class="login-box">
   <div class="card card-outline card-primary shadow-lg">
     <div class="card-header text-center">
@@ -42,19 +121,89 @@
         <button type="submit" id="submitBtn" class="btn btn-primary btn-block" disabled>
             <i class="fas fa-sign-in-alt mr-2"></i> ĐĂNG NHẬP NGAY
         </button>
+
+        <button type="button" class="btn btn-outline-info btn-block btn-sm mt-2" onclick="window.location.reload(true)">
+            <i class="fas fa-sync mr-1"></i> Đồng bộ dữ liệu mới nhất
+        </button>
       </form>
     </div>
+    <div class="card-footer bg-white text-center pt-3">
+        <p class="mb-1 text-muted">Chưa có thông tin học sinh?</p>
+        <button type="button" class="btn btn-success btn-block font-weight-bold shadow-sm" onclick="openRegisterModal()">
+            <i class="fas fa-user-plus mr-2"></i> ĐĂNG KÝ HỌC SINH MỚI
+        </button>
+    </div>
   </div>
+</div>
+
+<!-- Modal Register Student -->
+<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title font-weight-bold text-white"><i class="fas fa-user-plus mr-2"></i>Đăng ký Học sinh</h5>
+                <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 form-group"><label>Họ và Tên <span class="text-danger">*</span></label><input type="text" id="reg_name" class="form-control" placeholder="Nguyễn Văn A"></div>
+                    <div class="col-md-6 form-group"><label>Ngày sinh</label><input type="date" id="reg_dob" class="form-control"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group"><label>Chọn Nhóm <span class="text-danger">*</span></label>
+                        <select id="reg_group" class="form-control">
+                            <option value="">-- Đang tải... --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group"><label>Trường học</label><input type="text" id="reg_school" class="form-control"></div>
+                </div>
+                <div class="form-group"><label>Địa chỉ liên hệ</label><input type="text" id="reg_address" class="form-control"></div>
+                <div class="form-group"><label>Số điện thoại học sinh</label><input type="text" id="reg_phone" class="form-control"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" onclick="submitRegister()">Hoàn tất đăng ký</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal PIN Verification -->
+<div class="modal fade" id="modalPIN" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title font-weight-bold"><i class="fas fa-key mr-2"></i>Xác thực mã PIN</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mb-2">Nhập mã PIN (4 số) của bạn:</p>
+                <div class="form-group">
+                    <input type="password" id="pin_code" class="form-control text-center font-weight-bold" style="font-size: 1.5rem; letter-spacing: 10px;" placeholder="••••" maxlength="4" inputmode="numeric" autocomplete="one-time-code">
+                </div>
+                <button type="button" class="btn btn-primary btn-block" onclick="submitPIN()">XÁC NHẬN</button>
+                <button type="button" class="btn btn-link btn-sm mt-2" onclick="window.location.reload()">Quay lại đăng nhập</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbzxtNKV1ZPvO3hRhgFTuMs49QeuD5ALRnA4aRYQy20MXGLMmgLLfjkmEy3B-XM500RisA/exec";
 
-    window.onload = () => { sessionStorage.clear(); };
+    let tempUser = "";
+
+    window.onload = () => { 
+        sessionStorage.clear(); 
+        // Add event listener for the welcome screen button
+        document.getElementById('start-btn').addEventListener('click', () => {
+            document.getElementById('welcome-screen').classList.add('hidden');
+        });
+    };
 
     function onTurnstileSuccess() { 
         document.getElementById('submitBtn').disabled = false; 
@@ -80,11 +229,13 @@
             const res = await response.json();
 
             if (res.status === "success") {
-                sessionStorage.setItem('user', JSON.stringify(res.user));
-                toastr.success("Đăng nhập thành công!");
-                setTimeout(() => {
-                    window.location.replace(res.user.role === 'admin' ? 'admin.html' : 'index.html');
-                }, 800);
+                handleLoginSuccess(res.user);
+            } else if (res.status === "pin_required") {
+                // Yêu cầu nhập PIN
+                tempUser = res.username;
+                $('#modalPIN').modal('show');
+                $('#pin_code').val('');
+                btn.disabled = false; btn.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i> ĐĂNG NHẬP NGAY';
             } else {
                 toastr.error(res.message);
                 btn.disabled = false;
@@ -96,6 +247,78 @@
             btn.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i> ĐĂNG NHẬP NGAY';
         }
     });
+
+    async function submitPIN() {
+        const pin = $('#pin_code').val().trim();
+        if (pin.length !== 4) return toastr.warning("Mã PIN phải có 4 số!");
+
+        const btn = document.querySelector('#modalPIN button.btn-primary');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "VERIFY_PIN", payload: { username: tempUser, pin: pin } }) });
+            const res = await response.json();
+            if (res.status === "success") {
+                $('#modalPIN').modal('hide');
+                handleLoginSuccess(res.user);
+            } else {
+                toastr.error(res.message);
+                btn.disabled = false; btn.innerHTML = originalText;
+            }
+        } catch (e) { toastr.error("Lỗi kết nối"); btn.disabled = false; btn.innerHTML = originalText; $('#pin_code').val(''); }
+    }
+
+    function handleLoginSuccess(user) {
+        sessionStorage.setItem('user', JSON.stringify(user));
+        toastr.success("Đăng nhập thành công!");
+        setTimeout(() => window.location.replace(user.role === 'admin' ? 'admin.html' : 'index.html'), 800);
+    }
+
+    // --- LOGIC ĐĂNG KÝ ---
+    async function openRegisterModal() {
+        $('#modalRegister').modal('show');
+        // Load groups
+        try {
+            const response = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "GET_GROUPS_PUBLIC" }) });
+            const res = await response.json();
+            if (res.status === "success") {
+                let html = '<option value="">-- Chọn nhóm --</option>';
+                res.data.forEach(g => {
+                    html += `<option value="${g.id}">${g.name}</option>`;
+                });
+                $('#reg_group').html(html);
+            }
+        } catch (e) { console.error(e); }
+    }
+
+    async function submitRegister() {
+        const name = $('#reg_name').val().trim();
+        const group = $('#reg_group').val();
+        
+        if (!name || !group) return toastr.warning("Vui lòng nhập tên và chọn nhóm!");
+
+        const payload = {
+            fullname: name,
+            dob: $('#reg_dob').val(),
+            group_id: group,
+            school: $('#reg_school').val(),
+            address: $('#reg_address').val(),
+            phone: $('#reg_phone').val()
+        };
+
+        Swal.fire({ title: 'Đang đăng ký...', didOpen: () => Swal.showLoading() });
+        try {
+            const response = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "REGISTER_STUDENT", payload: payload }) });
+            const res = await response.json();
+            if (res.status === "success") {
+                Swal.fire('Thành công!', 'Đăng ký thành công. Dữ liệu đã được lưu vào hệ thống.', 'success');
+                $('#modalRegister').modal('hide');
+                $('#reg_name, #reg_dob, #reg_school, #reg_address, #reg_phone').val('');
+            } else Swal.fire('Lỗi', res.message, 'error');
+        } catch (e) { Swal.fire('Lỗi', 'Lỗi kết nối', 'error'); }
+    }
 </script>
 </body>
 </html>

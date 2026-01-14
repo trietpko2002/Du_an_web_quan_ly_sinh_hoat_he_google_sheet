@@ -16,13 +16,22 @@
         * { box-sizing: border-box; }
         
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; font-family: 'Roboto', sans-serif;
+            margin: 0; padding: 0; width: 100%;
+            font-family: 'Roboto', sans-serif;
         }
 
         body {
             display: flex; justify-content: center; align-items: center;
-            background: linear-gradient(135deg, #004a99 0%, #007bff 100%);
+            min-height: 100vh; overflow-x: hidden; padding: 1rem 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background-size: 200% 200%;
+            animation: gradientAnimation 5s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* --- UI CHÍNH --- */
@@ -65,7 +74,7 @@
         }
 
         .modal-header {
-            padding: 15px; border-bottom: 1px solid #eee; text-align: center; position: relative; background: #fafafa;
+            padding: 15px 40px 15px 15px; border-bottom: 1px solid #eee; text-align: center; position: relative; background: #fafafa;
         }
 
         .close { position: absolute; right: 20px; top: 12px; font-size: 30px; cursor: pointer; color: #999; }
@@ -119,19 +128,67 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
+        /* Nút bật tắt nhạc */
+        #musicToggle {
+            position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4); color: white;
+            padding: 10px 15px; border-radius: 30px; cursor: pointer;
+            font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+        }
+        #musicToggle:hover { background: rgba(255, 255, 255, 0.4); transform: scale(1.05); }
+
+        /* Hiệu ứng mưa */
+        .rain-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .drop {
+            position: absolute; top: -20px; width: 1px; height: 15px;
+            background: rgba(255, 255, 255, 0.5); animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh); } }
+
+        /* Đồng hồ đếm ngược */
+        .countdown-container {
+            display: flex; justify-content: center; gap: 15px; margin: 1.5rem 0;
+        }
+        .time-box {
+            background: rgba(0, 0, 0, 0.3); color: #fff; padding: 10px;
+            border-radius: 8px; min-width: 70px; text-align: center;
+            font-size: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .time-box span {
+            display: block; font-size: 1.5rem; font-weight: bold; color: var(--accent-yellow);
+        }
+
         @media (max-width: 768px) {
+            .container { padding: 1.5rem; width: 92%; }
+            h1 { font-size: 1.8rem; }
             .feature-detail-grid { grid-template-columns: 1fr; }
-            .tab-link { font-size: 0.7rem; padding: 10px 5px; }
+            .tab-link { font-size: 0.65rem; padding: 10px 2px; }
+            .countdown-container { gap: 8px; }
+            .time-box { min-width: 55px; padding: 8px 5px; }
+            .time-box span { font-size: 1.2rem; }
+            #musicToggle { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
+    <div class="rain-container"></div>
 
     <div class="container">
         <div style="font-weight: 700; color: var(--accent-yellow); font-size: 0.7rem; letter-spacing: 2px;">🌞 GIẢI PHÁP CHUYỂN ĐỔI SỐ CHO CÔNG TÁC QUẢN LÝ SINH HOẠT HÈ</div>
         <h1>HỆ THỐNG <br>QUẢN LÝ SINH HOẠT HÈ </h1>
         
         <div class="highlight-box">🚀 DỰ KIẾN VẬN HÀNH: 01/06/2026</div>
+
+        <div id="countdown" class="countdown-container">
+            <div class="time-box"><span id="days">00</span> Ngày</div>
+            <div class="time-box"><span id="hours">00</span> Giờ</div>
+            <div class="time-box"><span id="minutes">00</span> Phút</div>
+            <div class="time-box"><span id="seconds">00</span> Giây</div>
+        </div>
 
         <p style="color: #eee; font-size: 0.95rem; margin-bottom: 1.5rem;">
            Nền tảng Cloud tập trung giúp tối ưu hóa công tác quản lý,<br>
@@ -159,6 +216,9 @@ giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
             </div>
         </div>
     </div>
+
+    <button id="musicToggle">🎵 Bật nhạc</button>
+    <audio id="bgMusic" src="music.mp3" loop hidden></audio>
 
     <div id="featureModal" class="modal">
         <div class="modal-content">
@@ -331,6 +391,67 @@ giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
         
         document.getElementById('progressText').innerText = progressPercent + "%";
         document.getElementById('progressBar').style.width = progressPercent + "%";
+
+        // --- XỬ LÝ ÂM THANH (Fix lỗi chặn Autoplay) ---
+        const audio = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicToggle");
+        audio.volume = 0.5; // Đặt âm lượng 50% cho vừa phải
+
+        function updateMusicBtn() {
+            musicBtn.innerHTML = audio.paused ? "🎵 Bật nhạc" : "⏸️ Tắt nhạc";
+        }
+
+        musicBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Ngăn sự kiện click lan ra window
+            if (audio.paused) audio.play(); else audio.pause();
+            updateMusicBtn();
+        });
+
+        audio.play().then(updateMusicBtn).catch(() => {
+            updateMusicBtn();
+            // Nếu trình duyệt chặn, chờ người dùng click bất kỳ đâu để phát
+            window.addEventListener('click', () => {
+                if (audio.paused) { audio.play().then(updateMusicBtn); }
+            }, { once: true });
+        });
+
+        // --- HIỆU ỨNG MƯA RƠI ---
+        function createRain() {
+            const container = document.querySelector('.rain-container');
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = Math.random() * 1 + 0.5 + 's';
+            drop.style.opacity = Math.random() * 0.5 + 0.3;
+            container.appendChild(drop);
+            setTimeout(() => { drop.remove(); }, 2000);
+        }
+        setInterval(createRain, 30);
+
+        // --- ĐỒNG HỒ ĐẾM NGƯỢC ---
+        const targetDate = new Date("June 1, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<h3 style='color:white'>🎉 ĐÃ RA MẮT!</h3>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 
 </body>

@@ -93,11 +93,30 @@
             padding-bottom: 5px; display: inline-block;
             font-size: 1rem;
         }
+        .warning-box {
+            background: rgba(255, 204, 0, 0.15);
+            border: 1px solid rgba(255, 204, 0, 0.4);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
         .detail-item ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
         .detail-item li { margin-bottom: 8px; list-style-type: square; }
 
         .tab-title-main {
             text-align: center; font-weight: bold; color: #444; margin-bottom: 20px; text-decoration: underline;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper { margin-top: 1.5rem; width: 100%; }
+        .progress-info { display: flex; justify-content: space-between; color: #eee; font-size: 0.85rem; margin-bottom: 6px; font-weight: bold; }
+        .progress-bg { background: rgba(255,255,255,0.2); height: 10px; border-radius: 10px; overflow: hidden; position: relative; }
+        .progress-bar { 
+            height: 100%; background: var(--accent-yellow); width: 15%; 
+            border-radius: 10px; position: relative; 
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -109,21 +128,35 @@
 <body>
 
     <div class="container">
-        <div style="font-weight: 700; color: var(--accent-yellow); font-size: 0.7rem; letter-spacing: 2px;">QUẢN LÝ SINH HOẠT HÈ KỸ THUẬT SỐ</div>
-        <h1>COMING SOON!</h1>
+        <div style="font-weight: 700; color: var(--accent-yellow); font-size: 0.7rem; letter-spacing: 2px;">🌞 GIẢI PHÁP CHUYỂN ĐỔI SỐ CHO CÔNG TÁC QUẢN LÝ SINH HOẠT HÈ</div>
+        <h1>HỆ THỐNG <br>QUẢN LÝ SINH HOẠT HÈ </h1>
         
         <div class="highlight-box">🚀 DỰ KIẾN VẬN HÀNH: 01/06/2026</div>
 
         <p style="color: #eee; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Nền tảng Cloud tập trung giúp tối ưu hóa công tác quản lý,<br> 
-            giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
+           Nền tảng Cloud tập trung giúp tối ưu hóa công tác quản lý,<br>
+giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
         </p>
+
+        <div class="warning-box">
+            <strong>⚠️ LƯU Ý QUAN TRỌNG</strong><br>
+            Đây <strong>KHÔNG PHẢI</strong> là trang web chính thức.
+            Hệ thống hiện đang trong giai đoạn <strong>phát triển & thử nghiệm</strong>, chưa triển khai chạy thực tế.
+        </div>
 
         <div class="button-group">
             <button class="btn btn-features" onclick="openModal()">Xem chi tiết giải pháp</button>
-            <br>
             <a href="https://github.com/trietpko2002/Du_an_web_quan_ly_sinh_hoat_he_google_sheet.git" class="btn btn-outline">📂 GitHub</a>
-            <a href="https://docs.google.com/spreadsheets/d/1V74bXCh-DqoQfl819wh8ZORFyqRQkP2Hq-j0Gqv6PKw/edit?usp=sharing" class="btn btn-outline">✨ Google Sheets</a>
+        </div>
+
+        <div class="progress-wrapper">
+            <div class="progress-info">
+                <span>🚧 Tiến độ hoàn thiện</span>
+                <span id="progressText">70%</span>
+            </div>
+            <div class="progress-bg">
+                <div class="progress-bar" id="progressBar" style="width: 70%;"></div>
+            </div>
         </div>
     </div>
 
@@ -137,60 +170,133 @@
             <div class="tab-nav">
                 <button class="tab-link active" onclick="openTab(event, 'tab1')">👥 PHỤ TRÁCH NHÓM</button>
                 <button class="tab-link" onclick="openTab(event, 'tab2')">🛡️ QUẢN TRỊ ADMIN</button>
+                <button class="tab-link" onclick="openTab(event, 'tab3')">👨‍👩‍👧‍👦 HỌC SINH & PHỤ HUYNH</button>
+                <button class="tab-link" onclick="openTab(event, 'tab4')">⚙️ THÔNG TIN THÊM</button>
             </div>
 
             <div id="tab1" class="tab-content" style="display: block;">
-                <div class="tab-title-main">PHỤ TRÁCH NHÓM (INDEX.HTML)</div>
+                <div class="tab-title-main">Dành cho Quản lý Nhóm (Người phụ trách trực tiếp)</div>
                 <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>📍 Quản lý & Điểm danh</h4>
+                        <h4>✅ Điểm danh thông minh</h4>
                         <ul>
-                            <li><b>Danh sách:</b> Xem danh sách học sinh nhóm mình và xuất danh sách.</li>
-                            <li><b>Điểm danh:</b> Nút điểm danh Có mặt / Vắng mặt (Chia rõ: Có lý do & Không lý do).</li>
-                            <li><b>Hồ sơ:</b> Thêm, sửa, xóa thông tin học sinh trực thuộc nhóm.</li>
-                            <li><b>Đánh giá:</b> Thực hiện đánh giá học sinh cuối kỳ.</li>
+                            <li>Giao diện điểm danh nhanh theo từng ngày.</li>
+                            <li>Hỗ trợ trạng thái: Có mặt (✔️), Vắng có phép (🅿️), Vắng không phép (❌).</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>🔔 Tương tác & Thông báo</h4>
+                        <h4> Quản lý học sinh</h4>
                         <ul>
-                            <li><b>Nhận tin:</b> Nhận thông báo hoạt động từ Admin (có nút xác nhận đã xem để ghi log).</li>
-                            <li><b>Phản ánh:</b> Gửi ý kiế qua Google Form nhúng trực tiếp.</li>
-                            <li><b>Tiện ích:</b> Cho phép mở thông báo đẩy và có nút chuông báo động.</li>
-                            <li><b>Truy cập:</b> Đăng nhập qua Login.html để bảo mật dữ liệu nhóm.</li>
+                            <li>Xem danh sách học sinh theo nhóm.</li>
+                            <li>Thêm mới học sinh thủ công.</li>
+                            <li>📥 Nhập dữ liệu hàng loạt từ file Excel.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>💰 Quản lý Quỹ nhóm</h4>
+                        <ul>
+                            <li>Theo dõi thu / chi chi tiết.</li>
+                            <li>Tính toán quỹ tự động.</li>
+                            <li>📤 Xuất báo cáo quỹ ra file Excel.</li>
+                            <li>Minh bạch – dễ kiểm tra – dễ tổng hợp.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>🏅 Đánh giá & Xếp loại</h4>
+                        <ul>
+                            <li>Đánh giá ý thức kỷ luật, mức độ tích cực.</li>
+                            <li>Tổng hợp kết quả cuối đợt sinh hoạt.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>💬 Gửi góp ý</h4>
+                        <ul>
+                            <li>Gửi khó khăn, phản ánh hoặc đề xuất.</li>
+                            <li>Kết nối trực tiếp với Ban quản trị (Admin).</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div id="tab2" class="tab-content" style="display: none;">
-                <div class="tab-title-main">CÔNG CỤ QUẢN TRỊ VIÊN (ADMIN.HTML)</div>
+                <div class="tab-title-main">Dành cho Ban quản trị (Admin)</div>
                 <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>📊 Dashboard & Tài khoản</h4>
+                        <h4>📊 Bảng điều khiển (Dashboard)</h4>
                         <ul>
-                            <li><b>Thống kê:</b> Tổng số học sinh, số quản lý, số ý kiến phản hồi.</li>
-                            <li><b>Biến động:</b> Theo dõi tình hình có mặt/vắng theo thời gian thực.</li>
-                            <li><b>Quản lý User:</b> Thêm, sửa, xóa tài khoản quản lý.</li>
-                            <li><b>Mật khẩu:</b> Tính năng Reset password về mặc định (Abc@123).</li>
+                            <li>Thống kê tổng quan: Tổng số học sinh, tỷ lệ điểm danh.</li>
+                            <li>Hiển thị bằng biểu đồ trực quan.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>📂 Dữ liệu & Nhóm</h4>
+                        <h4>⚙️ Quản lý hệ thống</h4>
                         <ul>
-                            <li><b>Quản lý nhóm:</b> Thêm, sửa, xóa nhóm sinh hoạt (Dropdownlist chọn quản lý).</li>
-                            <li><b>Bộ lọc nâng cao:</b> Lọc theo tên quản lý, theo nhóm, năm sinh và ngày điểm danh.</li>
-                            <li><b>Xuất dữ liệu:</b> Xuất file Excel theo ngày để báo cáo.</li>
-                            <li><b>Ghi log (Tab 5):</b> Lưu lịch sử Đăng nhập, Thêm, Sửa, Xóa, Điểm danh, Đánh giá của từng quản lý.</li>
+                            <li>Quản lý danh sách nhóm sinh hoạt.</li>
+                            <li>Quản lý tài khoản người phụ trách.</li>
+                            <li>Quản lý toàn bộ dữ liệu học sinh.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>📢 Điều phối hoạt động</h4>
+                        <h4>📢 Thông báo</h4>
                         <ul>
-                            <li><b>Push thông báo:</b> Tạo thông báo (Tên hoạt động, nội dung, ngày giờ).</li>
-                            <li><b>Kiểm soát điểm danh:</b> Cài đặt cho phép điểm danh sớm hoặc đúng giờ mới mở cổng.</li>
-                            <li><b>Xử lý phản hồi:</b> Nhận danh sách ý kiến từ Google Form và đẩy lên Dashboard.</li>
-                            <li><b>Chốt kỳ:</b> Nút gạt bật/tắt chức năng đánh giá khi kết thúc sinh hoạt hè.</li>
+                            <li>Đăng tin tức, gửi thông báo chung đến tất cả các nhóm.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>🔐 Bảo mật & Nhật ký hệ thống</h4>
+                        <ul>
+                            <li>Theo dõi Logs hoạt động.</li>
+                            <li>Quản lý mã PIN bảo mật cho từng tài khoản.</li>
+                            <li>Kiểm soát các thao tác quan trọng.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>💾 Sao lưu dữ liệu</h4>
+                        <ul>
+                            <li>Chức năng Backup và Restore khi có sự cố.</li>
+                            <li>Đảm bảo an toàn & toàn vẹn dữ liệu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab3" class="tab-content" style="display: none;">
+                <div class="tab-title-main">Dành cho Học sinh / Phụ huynh</div>
+                <div class="feature-detail-grid" style="grid-template-columns: 1fr;">
+                    <div class="detail-item">
+                        <h4>📝 Đăng ký trực tuyến</h4>
+                        <ul>
+                            <li>Form đăng ký sinh hoạt hè trực tiếp ngay trên trang đăng nhập.</li>
+                            <li>Nhanh gọn – tiện lợi – dễ sử dụng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab4" class="tab-content" style="display: none;">
+                <div class="tab-title-main">Thông tin thêm</div>
+                <div class="feature-detail-grid">
+                    <div class="detail-item">
+                        <h4>🛠️ Công nghệ sử dụng</h4>
+                        <ul>
+                            <li><b>Giao diện:</b> HTML5, CSS3, JavaScript (jQuery).</li>
+                            <li><b>Template:</b> AdminLTE 3 (Bootstrap 4).</li>
+                            <li><b>Thư viện:</b> SweetAlert2, SheetJS, Chart.js, Toastr.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>🔒 Bảo mật</h4>
+                        <ul>
+                            <li>Bắt buộc đăng nhập để truy cập dữ liệu.</li>
+                            <li>Mã PIN lớp bảo mật thứ hai cho các thao tác quan trọng.</li>
+                            <li>Ghi log toàn bộ hoạt động hệ thống.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📌 Trạng thái dự án</h4>
+                        <ul>
+                            <li>🚧 Đang phát triển & hoàn thiện.</li>
+                            <li>Sẽ tiếp tục tối ưu giao diện, mở rộng phân quyền, nâng cao bảo mật và cải thiện trải nghiệm người dùng.</li>
                         </ul>
                     </div>
                 </div>
@@ -217,6 +323,14 @@
 
         // Đóng khi click ra ngoài
         window.onclick = function(event) { if (event.target == modal) closeModal(); }
+
+        // ============================================================
+        // 🛠️ CẬP NHẬT TIẾN ĐỘ DỰ ÁN TẠI ĐÂY
+        // ============================================================
+        const progressPercent = 10; // 👉 Sửa số này để thay đổi tiến độ (VD: 70, 80, 100)
+        
+        document.getElementById('progressText').innerText = progressPercent + "%";
+        document.getElementById('progressBar').style.width = progressPercent + "%";
     </script>
 
 </body>

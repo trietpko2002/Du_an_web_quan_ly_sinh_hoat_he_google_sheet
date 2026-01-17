@@ -1,147 +1,145 @@
-# 📝 HỆ THỐNG QUẢN LÝ SINH HOẠT HÈ (SHH)
+HỆ THỐNG QUẢN LÝ SINH HOẠT HÈ (SUMMER ACTIVITY MANAGEMENT SYSTEM)
 
-> 🌞 Giải pháp chuyển đổi số cho công tác quản lý sinh hoạt hè tại địa phương
+Phần mềm nền tảng web (Web-based Application) được xây dựng để hỗ trợ công tác quản lý, điểm danh, đánh giá và báo cáo hoạt động sinh hoạt hè tại địa phương. Hệ thống sử dụng công nghệ Serverless của Google Apps Script kết hợp với giao diện AdminLTE hiện đại.
 
----
+🚀 TỔNG QUAN CÔNG NGHỆ
+Backend:
+- Google Apps Script (GAS)
+- Dữ liệu lưu trữ và đồng bộ trực tiếp trên Google Sheets
 
-> [!IMPORTANT]  
-> ⚠️ **LƯU Ý QUAN TRỌNG**  
-> Đây **KHÔNG PHẢI** là trang web chính thức.  
-> Hệ thống hiện đang trong giai đoạn **phát triển & thử nghiệm**, **chưa triển khai chạy thực tế**.
+Frontend:
+- HTML5, CSS3, JavaScript
 
-🗓️ **Ngày vận hành chính thức dự kiến:**  
-📅 **01 / 06 / 2026**
+Framework / Library:
+- UI/UX: Bootstrap 4, AdminLTE 3.2.0
+- Xử lý dữ liệu: jQuery 3.6.0, SheetJS (XLSX)
+- Biểu đồ & Báo cáo: Chart.js
+- Tiện ích: SweetAlert2, Toastr, Canvas Confetti, PDFMake
 
----
+PWA (Progressive Web App):
+- Hỗ trợ Service Worker (sw.js)
+- Cache dữ liệu, hoạt động ngoại tuyến cơ bản
 
-## 🌟 Giới thiệu chung
+🛠 PHÂN HỆ CHỨC NĂNG CHI TIẾT
 
-**Hệ thống Quản lý Sinh hoạt hè (SHH)** là giải pháp số hóa nhằm hỗ trợ:
+Hệ thống được chia thành 3 phân hệ chính tương ứng với 3 nhóm quyền hạn:
+Admin (Quản trị viên), Supervisor (Giám sát), Manager (Quản lý nhóm)
 
-- Quản lý học sinh
-- Điểm danh hằng ngày
-- Điều hành và theo dõi các hoạt động hè tại địa phương
+────────────────────────────────
+1. PHÂN HỆ QUẢN TRỊ (ADMIN DASHBOARD)
+────────────────────────────────
+Tệp nguồn: admin.html, code.gs
 
-🎯 Mục tiêu của hệ thống:
-- Giảm thiểu thủ tục giấy tờ
-- Nâng cao tính minh bạch
-- Tăng hiệu quả quản lý và tổng hợp dữ liệu
-- Phù hợp cho **Đoàn Phường / Khu phố / Ban điều hành sinh hoạt hè**
+Chức năng chính:
+- Dashboard thống kê tổng quan:
+  + Tổng số học sinh
+  + Trạng thái điểm danh (Có mặt / Vắng phép / Không phép)
+  + Số lượng quản lý, nhóm sinh hoạt
+  + Biểu đồ phân bố học sinh theo nhóm, theo trường
+  + Biểu đồ biến động điểm danh theo thời gian thực
 
----
+- Quản lý dữ liệu học sinh:
+  + Thêm / Sửa / Xóa (CRUD)
+  + Import Excel danh sách học sinh (tự động kiểm tra trùng)
+  + Duyệt đăng ký học sinh tạm thời
 
-## 🚀 Các tính năng chính
+- Quản lý tài khoản (Managers):
+  + Tạo tài khoản, phân quyền (Admin / Supervisor / Manager)
+  + Hệ thống vinh danh VIP (VIP 1 → VIP 10)
+  + Reset mật khẩu
+  + Theo dõi lần đăng nhập cuối
 
-### 👨‍🏫 1. Dành cho **Quản lý Nhóm** (Người phụ trách trực tiếp)
+- Cấu hình hệ thống:
+  + Bật/Tắt chế độ bảo trì (Maintenance Mode)
+  + Hẹn giờ bảo trì tự động
+  + Nhạc nền bảo trì
+  + Marquee chữ chạy
+  + Hiệu ứng thời tiết (Mưa / Tuyết / Nắng)
+  + Dark Mode
+  + Giới hạn dung lượng upload
+  + Khóa nhập liệu học sinh
 
-#### ✅ Điểm danh thông minh
-- Giao diện điểm danh nhanh theo từng ngày
-- Hỗ trợ trạng thái:
-  - ✔️ Có mặt
-  - 🅿️ Vắng có phép (P)
-  - ❌ Vắng không phép (K)
+- Sao lưu & Phục hồi:
+  + Backup toàn bộ dữ liệu Google Sheets ra Excel
+  + Restore dữ liệu từ file backup (có Captcha xác thực)
 
-#### 👥 Quản lý học sinh
-- Xem danh sách học sinh theo nhóm
-- Thêm mới học sinh thủ công
-- 📥 **Nhập dữ liệu hàng loạt từ file Excel**
+- Thông báo & Bình chọn:
+  + Đăng thông báo chung (đính kèm file)
+  + Ghim thông báo khẩn cấp (Banner / Troll Mode)
+  + Tạo bình chọn (Poll)
 
-#### 💰 Quản lý Quỹ nhóm
-- Theo dõi thu / chi chi tiết
-- Tính toán quỹ tự động
-- 📤 Xuất báo cáo quỹ ra file Excel
-- Minh bạch – dễ kiểm tra – dễ tổng hợp
+────────────────────────────────
+2. PHÂN HỆ GIÁM SÁT (SUPERVISOR)
+────────────────────────────────
+Tệp nguồn: supervisor.html, supervisor_profile.html
 
-#### 🏅 Đánh giá & Xếp loại
-- Đánh giá:
-  - Ý thức kỷ luật
-  - Mức độ tích cực tham gia
-- Tổng hợp kết quả cuối đợt sinh hoạt
+Chức năng:
+- Theo dõi điểm danh tất cả các nhóm
+- Lọc theo ngày, trạng thái
+- Xuất báo cáo:
+  + Lịch sử hoạt động (.xlsx)
+  + Danh sách học sinh toàn phường
+- Quản lý file:
+  + Xem, tải tài liệu do Admin/Manager upload
+- Theo dõi bảng đánh giá, xếp loại học sinh
 
-#### 💬 Gửi góp ý
-- Gửi khó khăn, phản ánh hoặc đề xuất
-- Kết nối trực tiếp với **Ban quản trị (Admin)**
+────────────────────────────────
+3. PHÂN HỆ QUẢN LÝ NHÓM (MANAGER CLIENT)
+────────────────────────────────
+Tệp nguồn: index.html, profile.html
 
----
+Chức năng:
+- Điểm danh thông minh:
+  + Điểm danh theo ngày
+  + Import điểm danh từ Excel
 
-### 🛡️ 2. Dành cho **Ban quản trị (Admin)**
+- Quản lý học sinh nhóm:
+  + Danh sách học sinh nhóm phụ trách
+  + Chỉnh sửa thông tin
+  + Chuyển nhóm
 
-#### 📊 Bảng điều khiển (Dashboard)
-- Thống kê tổng quan:
-  - Tổng số học sinh
-  - Tỷ lệ điểm danh
-- Hiển thị bằng **biểu đồ trực quan**
+- Quản lý quỹ:
+  + Tự động tính tổng quỹ
+  + Ghi sổ Thu / Chi (log)
+  + Xuất báo cáo tài chính ra Excel
 
-#### ⚙️ Quản lý hệ thống
-- Quản lý:
-  - Danh sách nhóm sinh hoạt
-  - Tài khoản người phụ trách
-  - Toàn bộ dữ liệu học sinh
+- Đánh giá & xếp loại:
+  + Tiêu chí: Kỷ luật, Tích cực, Tình nguyện
+  + Tự động xếp loại: Xuất sắc / Tốt / Trung bình / Yếu
 
-#### 📢 Thông báo
-- Đăng tin tức
-- Gửi thông báo chung đến tất cả các nhóm
+- Phản ánh & kiến nghị:
+  + Gửi yêu cầu hỗ trợ
+  + Đính kèm hình ảnh minh chứng
 
-#### 🔐 Bảo mật & Nhật ký hệ thống
-- Theo dõi **Logs** hoạt động
-- Quản lý mã **PIN bảo mật** cho từng tài khoản
-- Kiểm soát các thao tác quan trọng
+- Trung tâm tải file:
+  + Upload tài liệu, hình ảnh
+  + Gửi link Google Drive cho Admin
 
-#### 💾 Sao lưu dữ liệu
-- Chức năng:
-  - Backup dữ liệu
-  - Restore khi có sự cố
-- Đảm bảo an toàn & toàn vẹn dữ liệu
+🔐 BẢO MẬT & TIỆN ÍCH (BACKEND code.gs)
+- Xác thực Username / Password
+- Phân quyền theo vai trò
+- Chống brute-force (khóa tạm sau >10 lần sai)
+- Ghi nhận User Agent
+- Mã hóa MD5 cho file upload
+- Captcha cho hành động nhạy cảm
+- Logging toàn bộ hành động hệ thống
+- Tự động xóa file tạm sau 7–30 ngày
+- Đồng bộ trạng thái “Đã xem” thông báo
 
----
+✨ HIỆU ỨNG GIAO DIỆN ĐẶC BIỆT
+- Easter Eggs (Confetti, Jack97 mode)
+- Weather Overlay (Mưa / Tuyết / Nắng)
+- VIP Frames (CSS Animation khung avatar)
 
-### 👨‍👩‍👧 3. Dành cho **Học sinh / Phụ huynh**
-
-#### 📝 Đăng ký trực tuyến
-- Form đăng ký sinh hoạt hè
-- Thực hiện trực tiếp ngay trên **trang đăng nhập**
-- Nhanh gọn – tiện lợi – dễ sử dụng
-
----
-
-## 🛠️ Công nghệ sử dụng
-
-### 🎨 Giao diện
-- **HTML5**
-- **CSS3**
-- **JavaScript (jQuery)**
-
-### 🧩 Template
-- **AdminLTE 3**
-- Dựa trên **Bootstrap 4**
-
-### 📚 Thư viện hỗ trợ
-- **SweetAlert2** – Thông báo chuyên nghiệp
-- **SheetJS (xlsx)** – Xử lý file Excel
-- **Chart.js** – Biểu đồ thống kê
-- **Toastr** – Thông báo nhanh, gọn
-
----
-
-## 🔒 Bảo mật
-
-- 🔑 Bắt buộc đăng nhập để truy cập dữ liệu
-- 🔐 **Mã PIN lớp bảo mật thứ hai** cho các thao tác quan trọng
-- 🧾 Ghi log toàn bộ hoạt động hệ thống
-
----
-
-## 📌 Trạng thái dự án
-
-🚧 **Đang phát triển & hoàn thiện**  
-✨ Sẽ tiếp tục cập nhật thêm:
-- Tối ưu giao diện
-- Mở rộng phân quyền
-- Nâng cao bảo mật
-- Cải thiện trải nghiệm người dùng
-
----
-
-> 💙 Dự án được xây dựng với mục tiêu **phục vụ cộng đồng**,  
-> hướng tới một mùa hè **kỷ luật – minh bạch – hiệu quả** cho thế hệ trẻ.
-
+📂 CẤU TRÚC DỮ LIỆU GOOGLE SHEETS
+- users
+- students
+- attendance
+- groups
+- logs
+- settings
+- notifications
+- feedback
+- evaluations
+- fund_logs
+- uploads

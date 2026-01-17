@@ -230,133 +230,137 @@ giảm 90% thời gian hội họp và xử lý giấy tờ thủ công.
             <div class="tab-nav">
                 <button class="tab-link active" onclick="openTab(event, 'tab1')">👥 PHỤ TRÁCH NHÓM</button>
                 <button class="tab-link" onclick="openTab(event, 'tab2')">🛡️ QUẢN TRỊ ADMIN</button>
-                <button class="tab-link" onclick="openTab(event, 'tab3')">👨‍👩‍👧‍👦 HỌC SINH & PHỤ HUYNH</button>
+                <button class="tab-link" onclick="openTab(event, 'tab3')">️ CẤP QUẢN LÝ</button>
                 <button class="tab-link" onclick="openTab(event, 'tab4')">⚙️ THÔNG TIN THÊM</button>
             </div>
 
             <div id="tab1" class="tab-content" style="display: block;">
-                <div class="tab-title-main">Dành cho Quản lý Nhóm (Người phụ trách trực tiếp)</div>
+                <div class="tab-title-main">Phân hệ Dành cho Phụ trách Nhóm (Manager Client)</div>
                 <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>✅ Điểm danh thông minh</h4>
+                        <h4>✅ Điểm danh Thông minh</h4>
                         <ul>
-                            <li>Giao diện điểm danh nhanh theo từng ngày.</li>
-                            <li>Hỗ trợ trạng thái: Có mặt (✔️), Vắng có phép (🅿️), Vắng không phép (❌).</li>
+                            <li><b>One-Touch:</b> Điểm danh nhanh (Có mặt / Vắng phép / Không phép).</li>
+                            <li><b>Import Excel:</b> Hỗ trợ tải file offline, tự động đồng bộ.</li>
+                            <li><b>Validation:</b> Chặn điểm danh trùng lặp trong ngày.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4> Quản lý học sinh</h4>
+                        <h4>💰 Quản lý Quỹ Đội/Nhóm</h4>
                         <ul>
-                            <li>Xem danh sách học sinh theo nhóm.</li>
-                            <li>Thêm mới học sinh thủ công.</li>
-                            <li>📥 Nhập dữ liệu hàng loạt từ file Excel.</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>💰 Quản lý Quỹ nhóm</h4>
-                        <ul>
-                            <li>Theo dõi thu / chi chi tiết.</li>
-                            <li>Tính toán quỹ tự động.</li>
-                            <li>📤 Xuất báo cáo quỹ ra file Excel.</li>
-                            <li>Minh bạch – dễ kiểm tra – dễ tổng hợp.</li>
+                            <li><b>Sổ Thu/Chi:</b> Ghi chi tiết giao dịch (Thu tiền áo, liên hoan...).</li>
+                            <li><b>Tự động tính toán:</b> Cộng dồn số dư (Balance).</li>
+                            <li><b>Minh bạch:</b> Thành viên có thể xem báo cáo công khai.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
                         <h4>🏅 Đánh giá & Xếp loại</h4>
                         <ul>
-                            <li>Đánh giá ý thức kỷ luật, mức độ tích cực.</li>
-                            <li>Tổng hợp kết quả cuối đợt sinh hoạt.</li>
+                            <li>Tiêu chí: Ý thức kỷ luật, Sự nhiệt tình, Tham gia phong trào.</li>
+                            <li>Thuật toán tự động xếp loại (Xuất sắc, Tốt, Khá...).</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>💬 Gửi góp ý</h4>
+                        <h4>💬 Phản hồi & Tiện ích</h4>
                         <ul>
-                            <li>Gửi khó khăn, phản ánh hoặc đề xuất.</li>
-                            <li>Kết nối trực tiếp với Ban quản trị (Admin).</li>
+                            <li>Gửi kiến nghị/báo cáo sự cố kèm <b>ảnh minh chứng</b>.</li>
+                            <li>Trung tâm tải xuống: Tài liệu, nhạc sinh hoạt.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div id="tab2" class="tab-content" style="display: none;">
-                <div class="tab-title-main">Dành cho Ban quản trị (Admin)</div>
+                <div class="tab-title-main">Phân hệ Quản trị Hệ thống (Admin Control Panel)</div>
                 <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>📊 Bảng điều khiển (Dashboard)</h4>
+                        <h4> Quản lý Dữ liệu (CRUD)</h4>
                         <ul>
-                            <li>Thống kê tổng quan: Tổng số học sinh, tỷ lệ điểm danh.</li>
-                            <li>Hiển thị bằng biểu đồ trực quan.</li>
+                            <li>Thêm/Sửa/Xóa tài khoản và hồ sơ học sinh.</li>
+                            <li><b>Smart Import:</b> Nhập từ Excel với cơ chế chống trùng lặp.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>⚙️ Quản lý hệ thống</h4>
+                        <h4>⚙️ Cấu hình Nâng cao</h4>
                         <ul>
-                            <li>Quản lý danh sách nhóm sinh hoạt.</li>
-                            <li>Quản lý tài khoản người phụ trách.</li>
-                            <li>Quản lý toàn bộ dữ liệu học sinh.</li>
+                            <li><b>Bảo trì:</b> Khóa hệ thống, màn hình chờ tùy chỉnh.</li>
+                            <li><b>Hiệu ứng:</b> Tuyết, Mưa, Pháo hoa, Jack97 Mode.</li>
+                            <li><b>Vinh danh:</b> Khung Avatar động (VIP System).</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>📢 Thông báo</h4>
+                        <h4> An toàn & Bảo mật</h4>
                         <ul>
-                            <li>Đăng tin tức, gửi thông báo chung đến tất cả các nhóm.</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>🔐 Bảo mật & Nhật ký hệ thống</h4>
-                        <ul>
-                            <li>Theo dõi Logs hoạt động.</li>
-                            <li>Quản lý mã PIN bảo mật cho từng tài khoản.</li>
-                            <li>Kiểm soát các thao tác quan trọng.</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>💾 Sao lưu dữ liệu</h4>
-                        <ul>
-                            <li>Chức năng Backup và Restore khi có sự cố.</li>
-                            <li>Đảm bảo an toàn & toàn vẹn dữ liệu.</li>
+                            <li><b>Backup & Restore:</b> Sao lưu/Phục hồi Database (kèm Captcha).</li>
+                            <li><b>Anti-Brute Force:</b> Khóa nếu sai pass 5 lần.</li>
+                            <li>Mã hóa tên file upload (MD5).</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div id="tab3" class="tab-content" style="display: none;">
-                <div class="tab-title-main">Dành cho Học sinh / Phụ huynh</div>
-                <div class="feature-detail-grid" style="grid-template-columns: 1fr;">
+                <div class="tab-title-main">Phân hệ Dành cho Cấp Quản lý (Supervisor Portal)</div>
+                <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>📝 Đăng ký trực tuyến</h4>
+                        <h4>📊 Dashboard Giám sát</h4>
                         <ul>
-                            <li>Form đăng ký sinh hoạt hè trực tiếp ngay trên trang đăng nhập.</li>
-                            <li>Nhanh gọn – tiện lợi – dễ sử dụng.</li>
+                            <li>Tổng quan tình hình nhân sự toàn phường/xã.</li>
+                            <li>Biểu đồ phân bổ học sinh.</li>
+                            <li><b>Logs:</b> Theo dõi nhật ký hoạt động thời gian thực.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📑 Báo cáo & Xuất dữ liệu</h4>
+                        <ul>
+                            <li>Xuất Lịch sử Điểm danh ra Excel (.xlsx).</li>
+                            <li>Xuất Danh sách trích ngang (kèm SĐT phụ huynh).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>⚖️ Kiểm tra chéo</h4>
+                        <ul>
+                            <li>Xem bảng đánh giá thi đua của từng nhóm.</li>
+                            <li>Đảm bảo công bằng trong xét duyệt khen thưởng.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div id="tab4" class="tab-content" style="display: none;">
-                <div class="tab-title-main">Thông tin thêm</div>
+                <div class="tab-title-main">Thông tin Dự án & Kỹ thuật</div>
                 <div class="feature-detail-grid">
                     <div class="detail-item">
-                        <h4>🛠️ Công nghệ sử dụng</h4>
+                        <h4>📖 Tổng quan</h4>
                         <ul>
-                            <li><b>Giao diện:</b> HTML5, CSS3, JavaScript (jQuery).</li>
-                            <li><b>Template:</b> AdminLTE 3 (Bootstrap 4).</li>
-                            <li><b>Thư viện:</b> SweetAlert2, SheetJS, Chart.js, Toastr.</li>
+                            <li>Giải pháp "All-in-One" quản lý sinh hoạt hè.</li>
+                            <li>Nền tảng Web, không cần cài đặt.</li>
+                            <li>Kết nối: Admin - Supervisor - Manager.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>🔒 Bảo mật</h4>
+                        <h4>🛠️ Kiến trúc Kỹ thuật</h4>
                         <ul>
-                            <li>Bắt buộc đăng nhập để truy cập dữ liệu.</li>
-                            <li>Mã PIN lớp bảo mật thứ hai cho các thao tác quan trọng.</li>
-                            <li>Ghi log toàn bộ hoạt động hệ thống.</li>
+                            <li><b>Backend:</b> Google Apps Script (Serverless).</li>
+                            <li><b>Database:</b> Google Spreadsheet (Real-time).</li>
+                            <li><b>Frontend:</b> AdminLTE 3, Bootstrap 4, jQuery.</li>
+                            <li><b>Libs:</b> SheetJS, Chart.js, SweetAlert2.</li>
                         </ul>
                     </div>
                     <div class="detail-item">
-                        <h4>📌 Trạng thái dự án</h4>
+                        <h4> Bảo mật & Riêng tư</h4>
                         <ul>
-                            <li>🚧 Đang phát triển & hoàn thiện.</li>
-                            <li>Sẽ tiếp tục tối ưu giao diện, mở rộng phân quyền, nâng cao bảo mật và cải thiện trải nghiệm người dùng.</li>
+                            <li>Dữ liệu lưu trên Google Sheet cá nhân (Admin).</li>
+                            <li>Không chia sẻ dữ liệu với bên thứ 3.</li>
+                            <li>Cơ chế xác thực và phân quyền chặt chẽ.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>⚠️ Disclaimer</h4>
+                        <ul>
+                            <li>Dự án Proof of Concept (Thử nghiệm ý tưởng).</li>
+                            <li>Mục đích nghiên cứu Chuyển đổi số.</li>
+                            <li>Chưa phải sản phẩm thương mại.</li>
                         </ul>
                     </div>
                 </div>

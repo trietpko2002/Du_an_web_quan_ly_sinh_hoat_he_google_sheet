@@ -99,8 +99,6 @@ Dễ dàng cài đặt chỉ trong 4 bước - Không cần thuê Server, không
 ## 💡 6. Tầm nhìn & Tiềm năng mở rộng
 
 Đây không chỉ là một phần mềm, đây là **bước đệm cho Chuyển đổi số** tại địa phương.
-* **Mở rộng:** Tích hợp quét mã QR Code để điểm danh không chạm.
-* **Kết nối:** Tích hợp Zalo API để gửi thông báo điểm danh về cho phụ huynh.
 * **Cộng đồng:** Mã nguồn mở cho phép nhân rộng mô hình sang các đơn vị khác.
 
 > **⚠️ TUYÊN BỐ MIỄN TRỪ TRÁCH NHIỆM:**
